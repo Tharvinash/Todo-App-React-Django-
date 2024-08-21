@@ -44,23 +44,30 @@ function Header() {
     <AppBar position='static' sx={{ boxShadow: 'none' }}>
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
-          <BookIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant='h6'
-            noWrap
-            component='a'
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontWeight: 700,
-              color: 'inherit',
+          <Link
+            to={'/'}
+            style={{
               textDecoration: 'none',
+              color: 'inherit',
+              display: 'flex',
+              alignItems: 'center',
             }}
           >
-            <Link to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <BookIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+            <Typography
+              variant='h6'
+              noWrap
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontWeight: 700,
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
               JUST DO IT
-            </Link>
-          </Typography>
+            </Typography>
+          </Link>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size='large'
@@ -91,55 +98,51 @@ function Header() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign='center'>
-                    {' '}
-                    <Link
-                      to={`/status/${page}`}
-                      style={{ textDecoration: 'none', color: 'inherit' }}
-                    >
-                      {page}
-                    </Link>
-                  </Typography>
-                </MenuItem>
+                <Link
+                  key={page}
+                  to={`/status/${page}`}
+                  style={{ textDecoration: 'none', color: 'inherit' }}
+                >
+                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                    <Typography textAlign='center'>{page}</Typography>
+                  </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>
 
           <BookIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant='h5'
-            noWrap
-            component='a'
-            href='#app-bar-with-responsive-menu'
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            <Link to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Link to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Typography
+              variant='h5'
+              noWrap
+              sx={{
+                mr: 2,
+                display: { xs: 'flex', md: 'none' },
+                flexGrow: 1,
+                fontWeight: 700,
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
               JUST DO IT
-            </Link>
-          </Typography>
+            </Typography>
+          </Link>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button
+              <Link
                 key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                to={`/status/${page}`}
+                style={{ textDecoration: 'none', color: 'inherit' }}
               >
-                <Link
-                  to={`/status/${page}`}
-                  style={{ textDecoration: 'none', color: 'inherit' }}
+                <Button
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
                 >
                   {page}
-                </Link>
-              </Button>
+                </Button>
+              </Link>
             ))}
           </Box>
 

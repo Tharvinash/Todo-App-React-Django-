@@ -15,7 +15,7 @@ import {
   deleteTaskData as deleteTaskAPI,
 } from '../api/TodoApi';
 import { TaskI } from '../type/task';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import SaveIcon from '@mui/icons-material/Save';
 import Dialog from '../components/Dialog';
 import { reverseFormatStatus } from '../utils/helperFunc';
@@ -27,6 +27,7 @@ const StatusList = () => {
   const [editTaskDesc, setEditTaskDesc] = useState('');
   const [editTaskId, setEditTaskId] = useState<null | number>(null);
   const [open, setOpen] = useState(false);
+  const location = useLocation();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -38,7 +39,7 @@ const StatusList = () => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [location.pathname]);
 
   const getData = () => {
     getTasksData('/todos').then((data) => {
