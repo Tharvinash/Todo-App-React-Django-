@@ -8,7 +8,7 @@ class Todo(models.Model):
         ('C', 'Completed'),
     ]
 
-    task = models.CharField(max_length=255)
+    task_desc = models.CharField(max_length=255)
     status = models.CharField(max_length=2, choices=STATUS_CHOICES, default='NS')
     created_at = models.DateTimeField(auto_now_add=True)
 

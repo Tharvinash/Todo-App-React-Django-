@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Task } from '../type/task';
+import { TaskI } from '../type/task';
 
 const apiClient = axios.create({
   baseURL: 'http://127.0.0.1:8000/',
@@ -8,7 +8,7 @@ const apiClient = axios.create({
   },
 });
 
-export const fetchData = async (endpoint: string): Promise<Task[]> => {
+export const getTasksData = async (endpoint: string): Promise<TaskI[]> => {
   try {
     const response = await apiClient.get(endpoint);
     return response.data;
@@ -18,7 +18,7 @@ export const fetchData = async (endpoint: string): Promise<Task[]> => {
   }
 };
 
-export const addTask = async (endpoint: string, data: any) => {
+export const addTaskData = async (endpoint: string, data: any) => {
   try {
     const response = await apiClient.post(endpoint, data);
     return response.data;
@@ -28,7 +28,7 @@ export const addTask = async (endpoint: string, data: any) => {
   }
 };
 
-export const updateTask = async (endpoint: string, data: any) => {
+export const updateTaskData = async (endpoint: string, data: any) => {
   try {
     const response = await apiClient.put(endpoint, data);
     return response.data;
@@ -38,7 +38,7 @@ export const updateTask = async (endpoint: string, data: any) => {
   }
 };
 
-export const deleteTask = async (endpoint: string) => {
+export const deleteTaskData = async (endpoint: string) => {
   try {
     const response = await apiClient.delete(endpoint);
     return response.data;

@@ -6,10 +6,10 @@ import {
   DialogContentText,
   DialogTitle,
 } from '@mui/material';
-import { Task } from '../type/task';
+import { TaskI } from '../type/task';
 
 interface DialogComponentI {
-  task: Task;
+  task: TaskI;
   open: boolean;
   handleClose: () => void;
   deleteTask: (id: number) => void;
@@ -25,7 +25,7 @@ const DialogComponent = (props: DialogComponentI) => {
       <DialogTitle id='alert-dialog-title'>{'Delete'}</DialogTitle>
       <DialogContent>
         <DialogContentText id='alert-dialog-description'>
-          Are you sure you want to delete the task "{props.task.task}".
+          Are you sure you want to delete the task "{props.task.task_desc}".
         </DialogContentText>
       </DialogContent>
       <DialogActions>

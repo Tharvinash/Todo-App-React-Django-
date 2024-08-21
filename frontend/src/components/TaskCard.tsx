@@ -6,37 +6,16 @@ import {
   Select,
   Typography,
 } from '@mui/material';
-import { Task } from '../type/task';
+import { StatusEnum, TaskI } from '../type/task';
+import { formatStatus, reverseFormatStatus } from '../utils/helperFunc';
 
-interface TaskI {
-  task: Task;
-  updateTask: (task: Task, status: string) => void;
+interface TaskCardI {
+  task: TaskI;
+  updateTask: (task: TaskI, status: string) => void;
 }
-const TaskCard = (props: TaskI) => {
-  const handleChange = (event: any, task: Task) => {
+const TaskCard = (props: TaskCardI) => {
+  const handleChange = (event: any, task: TaskI) => {
     props.updateTask(task, reverseFormatStatus(event.target.value));
-  };
-
-  const reverseFormatStatus = (status: string): string => {
-    if (status === 'Not Started') {
-      return 'NS';
-    } else if (status === 'In Progress') {
-      return 'IP';
-    } else {
-      return 'C';
-    }
-  };
-
-  const formatStatus = (status: string) => {
-    if (status === 'NS') {
-      return 'Not Started';
-    }
-    if (status === 'IP') {
-      return 'In Progress';
-    }
-    if (status === 'C') {
-      return 'Completed';
-    }
   };
 
   return (
@@ -49,14 +28,14 @@ const TaskCard = (props: TaskI) => {
         width: '100%',
       }}
     >
-      <Typography sx={{ width: '80%' }}>{props.task.task}</Typography>
+      <Typography sx={{ width: '80%' }}>{props.task.task_desc}</Typography>
 
       <FormControl sx={{ width: '20%' }}>
         <InputLabel id='select-label'>Status</InputLabel>
         <Select
           labelId='select-label'
           id='select'
-          value={formatStatus(props.task.status)}
+          value={formatStatus(props.task.status as StatusEnum)}
           label='Status'
           onChange={(e) => handleChange(e, props.task)}
         >

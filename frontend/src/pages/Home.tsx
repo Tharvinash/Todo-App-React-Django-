@@ -1,35 +1,40 @@
 import { useEffect, useState } from 'react';
 import { Box, Button, Container, TextField } from '@mui/material';
-import { fetchData, addTask as postTask, updateTask } from '../api/TodoApi';
+import {
+  getTasksData,
+  addTaskData as postTask,
+  updateTaskData,
+} from '../api/TodoApi';
 import TaskCard from '../components/TaskCard';
-import { Task } from '../type/task';
+import { TaskI } from '../type/task';
 
 const Home = () => {
   const [newTask, setNewTask] = useState('');
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<TaskI[]>([]);
 
   useEffect(() => {
     getData();
   }, []);
 
   const getData = () => {
-    fetchData('/todos').then((data) => {
+    getTasksData('/todos').then((data) => {
       setTasks(data);
     });
   };
 
   const addTask = () => {
     postTask('/todos/', {
-      task: newTask,
+      task_desc: newTask,
       status: 'NS',
     }).then(() => {
+      getData();
       setNewTask('');
     });
   };
 
-  const update = (task: Task, status: string) => {
-    updateTask(`/todos/${task.id}/`, {
-      task: task.task,
+  const update = (task: TaskI, status: string) => {
+    updateTaskData(`/todos/${task.id}/`, {
+      task_desc: task.task_desc,
       status: status,
     }).then(() => {
       getData();
