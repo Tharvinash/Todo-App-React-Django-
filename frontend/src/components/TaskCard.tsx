@@ -25,7 +25,6 @@ const TaskCard = (props: TaskCardI) => {
         p: 2,
         alignItems: 'center',
         justifyContent: 'space-between',
-        width: '100%',
       }}
     >
       <Typography sx={{ width: '80%' }}>{props.task.task_desc}</Typography>

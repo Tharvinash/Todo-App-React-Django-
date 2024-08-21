@@ -14,7 +14,7 @@ import {
   updateTaskData,
   deleteTaskData as deleteTaskAPI,
 } from '../api/TodoApi';
-import { TaskI } from '../type/task';
+import { StatusEnum, TaskI } from '../type/task';
 import { useLocation, useParams } from 'react-router-dom';
 import SaveIcon from '@mui/icons-material/Save';
 import Dialog from '../components/Dialog';
@@ -50,6 +50,15 @@ const StatusList = () => {
       }
     });
   };
+
+  const renderTitle = () => {
+    const shortStatus = status && reverseFormatStatus(decodeURIComponent(status))
+    if (shortStatus === StatusEnum.InProgress) {
+      return 'Status: In Progress'
+    } else {
+      return 'Status: Completed'
+    }
+  }
 
   const onUpdateTask = (task: TaskI) => {
     setEditTaskId(task.id);
@@ -124,7 +133,7 @@ const StatusList = () => {
   return (
     <Container>
       <Typography variant='h6' sx={{ mt: 5, textAlign: 'center' }}>
-        Status
+        {renderTitle()}
       </Typography>
 
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 5 }}>
@@ -136,7 +145,6 @@ const StatusList = () => {
               p: 2,
               alignItems: 'center',
               justifyContent: 'space-between',
-              width: '100%',
             }}
           >
             {renderDetail(task)}

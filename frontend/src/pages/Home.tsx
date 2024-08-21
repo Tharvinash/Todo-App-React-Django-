@@ -23,13 +23,15 @@ const Home = () => {
   };
 
   const addTask = () => {
-    postTask('/todos/', {
-      task_desc: newTask,
-      status: 'NS',
-    }).then(() => {
-      getData();
-      setNewTask('');
-    });
+    if (newTask) {
+      postTask('/todos/', {
+        task_desc: newTask,
+        status: 'NS',
+      }).then(() => {
+        getData();
+        setNewTask('');
+      });
+    }
   };
 
   const update = (task: TaskI, status: string) => {
@@ -48,6 +50,7 @@ const Home = () => {
           <TextField
             label='Task'
             variant='outlined'
+            required
             fullWidth
             sx={{ mr: 2 }}
             value={newTask}
