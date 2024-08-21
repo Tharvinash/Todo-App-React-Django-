@@ -1,22 +1,39 @@
-import { useState } from 'react';
-import {
-  Box,
-  Button,
-  Paper,
-  Container,
-  TextField,
-  Typography,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-} from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Box, Button, Container, TextField } from '@mui/material';
+import { fetchData, addTask as postTask, updateTask } from '../api/TodoApi';
+import TaskCard from '../components/TaskCard';
+import { Task } from '../type/task';
 
 const Home = () => {
-  const [age, setAge] = useState('');
+  const [newTask, setNewTask] = useState('');
+  const [tasks, setTasks] = useState<Task[]>([]);
 
-  const handleChange = (event: any) => {
-    setAge(event.target.value);
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = () => {
+    fetchData('/todos').then((data) => {
+      setTasks(data);
+    });
+  };
+
+  const addTask = () => {
+    postTask('/todos/', {
+      task: newTask,
+      status: 'NS',
+    }).then(() => {
+      setNewTask('');
+    });
+  };
+
+  const update = (task: Task, status: string) => {
+    updateTask(`/todos/${task.id}/`, {
+      task: task.task,
+      status: status,
+    }).then(() => {
+      getData();
+    });
   };
 
   return (
@@ -28,39 +45,18 @@ const Home = () => {
             variant='outlined'
             fullWidth
             sx={{ mr: 2 }}
+            value={newTask}
+            onChange={(e) => setNewTask(e.target.value)}
           />
-          <Button variant='contained' sx={{ width: '10%' }}>
+          <Button variant='contained' sx={{ width: '10%' }} onClick={addTask}>
             Add
           </Button>
         </Box>
 
-        <Box sx={{ mt: 5 }}>
-          <Paper
-            sx={{
-              display: 'flex',
-              p: 2,
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              width: '100%',
-            }}
-          >
-            <Typography sx={{ width: '80%' }}>Task</Typography>
-
-            <FormControl sx={{ width: '20%' }}>
-              <InputLabel id='select-label'>Status</InputLabel>
-              <Select
-                labelId='select-label'
-                id='select'
-                value={age}
-                label='Status'
-                onChange={handleChange}
-              >
-                <MenuItem value='Not Started'>Not Started</MenuItem>
-                <MenuItem value='In Progress'>In Progress</MenuItem>
-                <MenuItem value='Completed'>Completed</MenuItem>
-              </Select>
-            </FormControl>
-          </Paper>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 5 }}>
+          {tasks.map((task) => (
+            <TaskCard task={task} updateTask={update} key={task.id} />
+          ))}
         </Box>
       </Box>
     </Container>
