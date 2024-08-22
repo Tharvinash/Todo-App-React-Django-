@@ -17,6 +17,7 @@ import {
 import { StatusEnum, TaskI } from '../type/task';
 import { useLocation, useParams } from 'react-router-dom';
 import SaveIcon from '@mui/icons-material/Save';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Dialog from '../components/Dialog';
 import { reverseFormatStatus } from '../utils/helperFunc';
 
@@ -155,7 +156,7 @@ const StatusList = () => {
           >
             {renderDetail(task)}
             <Box>
-              {renderIcon(task)}
+              {status !== 'Completed' ? renderIcon(task) : <CheckCircleIcon />}
               <Dialog
                 task={task}
                 open={open}
