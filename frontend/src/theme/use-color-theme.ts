@@ -6,7 +6,6 @@ export const useColorTheme = () => {
   const [mode, setMode] = React.useState<PaletteMode>('light');
 
   const toggleColorMode = () => {
-    console.log('FIRED');
     setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
   };
 

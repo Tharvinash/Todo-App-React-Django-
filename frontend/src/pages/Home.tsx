@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Box, Button, Container, TextField } from '@mui/material';
+import { Box, Button, Container, TextField, useTheme } from '@mui/material';
 import {
   getTasksData,
   addTaskData as postTask,
@@ -7,10 +7,13 @@ import {
 } from '../api/TodoApi';
 import TaskCard from '../components/TaskCard';
 import { TaskI } from '../type/task';
+import { tokens } from '../theme/theme';
 
 const Home = () => {
   const [newTask, setNewTask] = useState('');
   const [tasks, setTasks] = useState<TaskI[]>([]);
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
   useEffect(() => {
     getData();
@@ -56,7 +59,16 @@ const Home = () => {
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
           />
-          <Button variant='contained' sx={{ width: '10%' }} onClick={addTask}>
+          <Button
+            variant='contained'
+            sx={{
+              width: '10%',
+              ...(theme.palette.mode === 'dark' && {
+                backgroundColor: colors.grey[800],
+              }),
+            }}
+            onClick={addTask}
+          >
             Add
           </Button>
         </Box>
