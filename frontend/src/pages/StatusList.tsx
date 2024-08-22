@@ -97,7 +97,11 @@ const StatusList = () => {
         onChange={(e) => setEditTaskDesc(e.target.value)}
       />
     ) : (
-      <Typography sx={{ width: '100%' }}>{task.task_desc}</Typography>
+      <Typography
+        sx={{ width: '100%', mr: { xs: 0, sm: 2 }, mb: { xs: 2, sm: 0 } }}
+      >
+        {task.task_desc}
+      </Typography>
     );
   };
 
@@ -142,7 +146,8 @@ const StatusList = () => {
           <Paper
             key={task.id}
             sx={{
-              display: 'flex',
+              display: { xs: 'flex' },
+              flexDirection: { xs: 'column', sm: 'row' },
               p: 2,
               alignItems: 'center',
               justifyContent: 'space-between',
