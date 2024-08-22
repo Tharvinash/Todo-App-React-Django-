@@ -25,9 +25,19 @@ const TaskCard = (props: TaskCardI) => {
         p: 2,
         alignItems: 'center',
         justifyContent: 'space-between',
+        width: '100%',
       }}
     >
-      <Typography sx={{ width: '80%' }}>{props.task.task_desc}</Typography>
+      <Typography
+        sx={{
+          width: '80%',
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+        }}
+      >
+        {props.task.task_desc}
+      </Typography>
 
       <FormControl sx={{ width: '20%' }}>
         <InputLabel id='select-label'>Status</InputLabel>
