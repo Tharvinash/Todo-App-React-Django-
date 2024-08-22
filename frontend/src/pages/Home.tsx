@@ -49,20 +49,32 @@ const Home = () => {
   return (
     <Container>
       <Box>
-        <Box sx={{ display: 'flex', width: '100%', mt: 5 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            width: '100%',
+            mt: 5,
+            flexDirection: { xs: 'column', sm: 'row' },
+            alignItems: { xs: 'center' }
+          }}
+        >
           <TextField
             label='Task'
             variant='outlined'
             required
             fullWidth
-            sx={{ mr: 2 }}
+            sx={{ 
+              mr: { xs: 0, sm: 2 },  
+              mb: { xs: 2, sm: 0 }
+            }}
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
           />
           <Button
             variant='contained'
             sx={{
-              width: '10%',
+              height: '3.5rem',
+              width: { xs: '40%', sm: '20%' },
               ...(theme.palette.mode === 'dark' && {
                 backgroundColor: colors.grey[800],
               }),

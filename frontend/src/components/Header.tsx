@@ -42,13 +42,13 @@ const Header = () => {
               alignItems: 'center',
             }}
           >
-            <BookIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+            <BookIcon sx={{ display: { xs: 'none', sm: 'flex' }, mr: 1 }} />
             <Typography
               variant='h6'
               noWrap
               sx={{
                 mr: 2,
-                display: { xs: 'none', md: 'flex' },
+                display: { xs: 'none', sm: 'flex' },
                 fontWeight: 700,
                 color: 'inherit',
                 textDecoration: 'none',
@@ -57,7 +57,7 @@ const Header = () => {
               JUST DO IT
             </Typography>
           </Link>
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'none' } }}>
             <IconButton
               size='large'
               aria-label='account of current user'
@@ -83,7 +83,7 @@ const Header = () => {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
+                display: { xs: 'block', sm: 'none' },
               }}
             >
               {pages.map((page) => (
@@ -100,24 +100,31 @@ const Header = () => {
             </Menu>
           </Box>
 
-          <BookIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Link to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <Typography
-              variant='h5'
-              noWrap
-              sx={{
-                mr: 2,
-                display: { xs: 'flex', md: 'none' },
-                flexGrow: 1,
-                fontWeight: 700,
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              JUST DO IT
-            </Typography>
-          </Link>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <BookIcon sx={{ display: { xs: 'flex', sm: 'none' }, mr: 1 }} />
+          <Box
+            sx={{
+              display: { xs: 'flex', sm: 'none' },
+              flexGrow: 1,
+            }}
+          >
+            <Link to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <Typography
+                variant='h5'
+                noWrap
+                sx={{
+                  mr: 2,
+                  display: { xs: 'flex', sm: 'none' },
+                  flexGrow: 1,
+                  fontWeight: 700,
+                  color: 'inherit',
+                  textDecoration: 'none',
+                }}
+              >
+                JUST DO IT
+              </Typography>
+            </Link>
+          </Box>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}>
             {pages.map((page) => (
               <Link
                 key={page}
