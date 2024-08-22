@@ -10,15 +10,16 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import BookIcon from '@mui/icons-material/Book';
-import { alpha, styled } from '@mui/material/styles';
-import Switch from '@mui/material/Switch';
-import { grey } from '@mui/material/colors';
 import { Link } from 'react-router-dom';
+import { useThemeContext } from '../theme/ThemeContextProvider';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 
 const pages = ['In Progress', 'Completed'];
 
-function Header() {
+const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const { mode, toggleColorMode } = useThemeContext();
 
   const handleOpenNavMenu = (event: any) => {
     setAnchorElNav(event.currentTarget);
@@ -27,18 +28,6 @@ function Header() {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
-  const DarkSwitch = styled(Switch)(({ theme }) => ({
-    '& .MuiSwitch-switchBase.Mui-checked': {
-      color: grey[600],
-      '&:hover': {
-        backgroundColor: alpha(grey[600], theme.palette.action.hoverOpacity),
-      },
-    },
-    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-      backgroundColor: grey[600],
-    },
-  }));
 
   return (
     <AppBar position='static' sx={{ boxShadow: 'none' }}>
@@ -147,11 +136,17 @@ function Header() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <DarkSwitch defaultChecked />
+            <IconButton
+              sx={{ ml: 1 }}
+              onClick={toggleColorMode}
+              color='inherit'
+            >
+              {mode === 'dark' ? <DarkModeIcon /> : <LightModeIcon />}
+            </IconButton>
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
   );
-}
+};
 export default Header;

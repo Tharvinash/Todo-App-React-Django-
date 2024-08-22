@@ -52,13 +52,14 @@ const StatusList = () => {
   };
 
   const renderTitle = () => {
-    const shortStatus = status && reverseFormatStatus(decodeURIComponent(status))
+    const shortStatus =
+      status && reverseFormatStatus(decodeURIComponent(status));
     if (shortStatus === StatusEnum.InProgress) {
-      return 'Status: In Progress'
+      return 'Status: In Progress';
     } else {
-      return 'Status: Completed'
+      return 'Status: Completed';
     }
-  }
+  };
 
   const onUpdateTask = (task: TaskI) => {
     setEditTaskId(task.id);
