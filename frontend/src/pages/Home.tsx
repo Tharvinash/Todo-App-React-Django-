@@ -55,7 +55,7 @@ const Home = () => {
             width: '100%',
             mt: 5,
             flexDirection: { xs: 'column', sm: 'row' },
-            alignItems: { xs: 'center' }
+            alignItems: { xs: 'center' },
           }}
         >
           <TextField
@@ -63,9 +63,9 @@ const Home = () => {
             variant='outlined'
             required
             fullWidth
-            sx={{ 
-              mr: { xs: 0, sm: 2 },  
-              mb: { xs: 2, sm: 0 }
+            sx={{
+              mr: { xs: 0, sm: 2 },
+              mb: { xs: 2, sm: 0 },
             }}
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
@@ -86,9 +86,12 @@ const Home = () => {
         </Box>
 
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 5 }}>
-          {tasks.map((task) => (
-            <TaskCard task={task} updateTask={update} key={task.id} />
-          ))}
+          {tasks
+            .slice()
+            .reverse()
+            .map((task) => (
+              <TaskCard task={task} updateTask={update} key={task.id} />
+            ))}
         </Box>
       </Box>
     </Container>
