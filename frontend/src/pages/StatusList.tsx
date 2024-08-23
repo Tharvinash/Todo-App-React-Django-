@@ -28,9 +28,11 @@ const StatusList = () => {
   const [editTaskDesc, setEditTaskDesc] = useState('');
   const [editTaskId, setEditTaskId] = useState<null | number>(null);
   const [open, setOpen] = useState(false);
+  const [task, setTask] = useState<TaskI | null>(null);
   const location = useLocation();
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (task: TaskI) => {
+    setTask(task);
     setOpen(true);
   };
 
@@ -128,7 +130,7 @@ const StatusList = () => {
           variant='contained'
           color='error'
           startIcon={<DeleteIcon />}
-          onClick={handleClickOpen}
+          onClick={() => handleClickOpen(task)}
         >
           Delete
         </Button>
@@ -157,15 +159,17 @@ const StatusList = () => {
             {renderDetail(task)}
             <Box>
               {status !== 'Completed' ? renderIcon(task) : <CheckCircleIcon />}
-              <Dialog
-                task={task}
-                open={open}
-                handleClose={handleClose}
-                deleteTask={deleteTask}
-              />
             </Box>
           </Paper>
         ))}
+        {task && (
+          <Dialog
+            task={task}
+            open={open}
+            handleClose={handleClose}
+            deleteTask={deleteTask}
+          />
+        )}
       </Box>
     </Container>
   );

@@ -4,17 +4,18 @@ import {
   MenuItem,
   Paper,
   Select,
+  SelectChangeEvent,
   Typography,
 } from '@mui/material';
-import { StatusEnum, TaskI } from '../type/task';
+import { Status, StatusEnum, TaskI } from '../type/task';
 import { formatStatus, reverseFormatStatus } from '../utils/helperFunc';
 
 interface TaskCardI {
   task: TaskI;
-  updateTask: (task: TaskI, status: string) => void;
+  updateTask: (task: TaskI, status: Status) => void;
 }
 const TaskCard = (props: TaskCardI) => {
-  const handleChange = (event: any, task: TaskI) => {
+  const handleChange = (event: SelectChangeEvent<string>, task: TaskI) => {
     props.updateTask(task, reverseFormatStatus(event.target.value));
   };
 
@@ -38,7 +39,7 @@ const TaskCard = (props: TaskCardI) => {
         {props.task.task_desc}
       </Typography>
 
-      <FormControl sx={{ width: { sm: '20%' }, display: {xs: 'flex'},  }}>
+      <FormControl sx={{ width: { sm: '20%' }, display: { xs: 'flex' } }}>
         <InputLabel id='select-label'>Status</InputLabel>
         <Select
           labelId='select-label'

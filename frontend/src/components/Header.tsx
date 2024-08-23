@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -18,11 +18,13 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 const pages = ['In Progress', 'Completed'];
 
 const Header = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState<HTMLElement | null>(null);
   const { mode, toggleColorMode } = useThemeContext();
 
-  const handleOpenNavMenu = (event: any) => {
-    setAnchorElNav(event.currentTarget);
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    if (event.currentTarget instanceof HTMLElement) {
+      setAnchorElNav(event.currentTarget);
+    }
   };
 
   const handleCloseNavMenu = () => {

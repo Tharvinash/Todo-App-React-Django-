@@ -6,7 +6,7 @@ import {
   updateTaskData,
 } from '../api/TodoApi';
 import TaskCard from '../components/TaskCard';
-import { TaskI } from '../type/task';
+import { Status, TaskI } from '../type/task';
 import { tokens } from '../theme/theme';
 
 const Home = () => {
@@ -37,7 +37,7 @@ const Home = () => {
     }
   };
 
-  const update = (task: TaskI, status: string) => {
+  const update = (task: TaskI, status: Status) => {
     updateTaskData(`/todos/${task.id}/`, {
       task_desc: task.task_desc,
       status: status,

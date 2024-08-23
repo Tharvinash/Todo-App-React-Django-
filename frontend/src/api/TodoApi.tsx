@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { TaskI } from '../type/task';
+import { TaskI, TaskInputI } from '../type/task';
 
 const apiClient = axios.create({
   baseURL: 'http://127.0.0.1:8000/',
@@ -18,7 +18,7 @@ export const getTasksData = async (endpoint: string): Promise<TaskI[]> => {
   }
 };
 
-export const addTaskData = async (endpoint: string, data: any) => {
+export const addTaskData = async (endpoint: string, data: TaskInputI) => {
   try {
     const response = await apiClient.post(endpoint, data);
     return response.data;
@@ -28,7 +28,7 @@ export const addTaskData = async (endpoint: string, data: any) => {
   }
 };
 
-export const updateTaskData = async (endpoint: string, data: any) => {
+export const updateTaskData = async (endpoint: string, data: TaskInputI) => {
   try {
     const response = await apiClient.put(endpoint, data);
     return response.data;
