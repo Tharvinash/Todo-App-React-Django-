@@ -30,7 +30,7 @@ const Header = () => {
   };
 
   return (
-    <AppBar position='static' sx={{ boxShadow: 'none' }}>
+    <AppBar position='sticky' sx={{ boxShadow: 'none' }}>
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
           <Link
