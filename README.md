@@ -63,8 +63,13 @@ Before you begin, ensure you have the following installed:
    npm run dev
 ## Screenshots
 
+### API
 ![Screenshot 2024-08-20 161018](https://github.com/user-attachments/assets/0a58109e-5566-49ae-855c-16278fb0c93e)
 
 ![Screenshot 2024-08-20 161032](https://github.com/user-attachments/assets/b6469bfa-4f36-40ab-9d3c-9e177f3da069)
 
+### Web view
+![Screenshot 2024-08-23 144554](https://github.com/user-attachments/assets/a1ed1a34-f32a-4ae9-b75b-6e849e19db8c)
 
+### Mobile View
+![Screenshot 2024-08-23 145203](https://github.com/user-attachments/assets/3c55197d-0373-4758-9a64-2af9a7b238dc)
