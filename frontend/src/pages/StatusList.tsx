@@ -17,6 +17,7 @@ import {
 import { StatusEnum, TaskI } from '../type/task';
 import { useLocation, useParams } from 'react-router-dom';
 import SaveIcon from '@mui/icons-material/Save';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Dialog from '../components/Dialog';
 import { reverseFormatStatus } from '../utils/helperFunc';
 
@@ -52,13 +53,14 @@ const StatusList = () => {
   };
 
   const renderTitle = () => {
-    const shortStatus = status && reverseFormatStatus(decodeURIComponent(status))
+    const shortStatus =
+      status && reverseFormatStatus(decodeURIComponent(status));
     if (shortStatus === StatusEnum.InProgress) {
-      return 'Status: In Progress'
+      return 'Status: In Progress';
     } else {
-      return 'Status: Completed'
+      return 'Status: Completed';
     }
-  }
+  };
 
   const onUpdateTask = (task: TaskI) => {
     setEditTaskId(task.id);
@@ -96,7 +98,11 @@ const StatusList = () => {
         onChange={(e) => setEditTaskDesc(e.target.value)}
       />
     ) : (
-      <Typography sx={{ width: '100%' }}>{task.task_desc}</Typography>
+      <Typography
+        sx={{ width: '100%', mr: { xs: 0, sm: 2 }, mb: { xs: 2, sm: 0 } }}
+      >
+        {task.task_desc}
+      </Typography>
     );
   };
 
@@ -141,7 +147,8 @@ const StatusList = () => {
           <Paper
             key={task.id}
             sx={{
-              display: 'flex',
+              display: { xs: 'flex' },
+              flexDirection: { xs: 'column', sm: 'row' },
               p: 2,
               alignItems: 'center',
               justifyContent: 'space-between',
@@ -149,7 +156,7 @@ const StatusList = () => {
           >
             {renderDetail(task)}
             <Box>
-              {renderIcon(task)}
+              {status !== 'Completed' ? renderIcon(task) : <CheckCircleIcon />}
               <Dialog
                 task={task}
                 open={open}

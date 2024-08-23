@@ -10,15 +10,16 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import BookIcon from '@mui/icons-material/Book';
-import { alpha, styled } from '@mui/material/styles';
-import Switch from '@mui/material/Switch';
-import { grey } from '@mui/material/colors';
 import { Link } from 'react-router-dom';
+import { useThemeContext } from '../theme/ThemeContextProvider';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 
 const pages = ['In Progress', 'Completed'];
 
-function Header() {
+const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const { mode, toggleColorMode } = useThemeContext();
 
   const handleOpenNavMenu = (event: any) => {
     setAnchorElNav(event.currentTarget);
@@ -28,20 +29,8 @@ function Header() {
     setAnchorElNav(null);
   };
 
-  const DarkSwitch = styled(Switch)(({ theme }) => ({
-    '& .MuiSwitch-switchBase.Mui-checked': {
-      color: grey[600],
-      '&:hover': {
-        backgroundColor: alpha(grey[600], theme.palette.action.hoverOpacity),
-      },
-    },
-    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-      backgroundColor: grey[600],
-    },
-  }));
-
   return (
-    <AppBar position='static' sx={{ boxShadow: 'none' }}>
+    <AppBar position='sticky' sx={{ boxShadow: 'none' }}>
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
           <Link
@@ -53,13 +42,13 @@ function Header() {
               alignItems: 'center',
             }}
           >
-            <BookIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+            <BookIcon sx={{ display: { xs: 'none', sm: 'flex' }, mr: 1 }} />
             <Typography
               variant='h6'
               noWrap
               sx={{
                 mr: 2,
-                display: { xs: 'none', md: 'flex' },
+                display: { xs: 'none', sm: 'flex' },
                 fontWeight: 700,
                 color: 'inherit',
                 textDecoration: 'none',
@@ -68,7 +57,7 @@ function Header() {
               JUST DO IT
             </Typography>
           </Link>
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'none' } }}>
             <IconButton
               size='large'
               aria-label='account of current user'
@@ -94,7 +83,7 @@ function Header() {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
+                display: { xs: 'block', sm: 'none' },
               }}
             >
               {pages.map((page) => (
@@ -111,24 +100,31 @@ function Header() {
             </Menu>
           </Box>
 
-          <BookIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Link to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <Typography
-              variant='h5'
-              noWrap
-              sx={{
-                mr: 2,
-                display: { xs: 'flex', md: 'none' },
-                flexGrow: 1,
-                fontWeight: 700,
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              JUST DO IT
-            </Typography>
-          </Link>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <BookIcon sx={{ display: { xs: 'flex', sm: 'none' }, mr: 1 }} />
+          <Box
+            sx={{
+              display: { xs: 'flex', sm: 'none' },
+              flexGrow: 1,
+            }}
+          >
+            <Link to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <Typography
+                variant='h5'
+                noWrap
+                sx={{
+                  mr: 2,
+                  display: { xs: 'flex', sm: 'none' },
+                  flexGrow: 1,
+                  fontWeight: 700,
+                  color: 'inherit',
+                  textDecoration: 'none',
+                }}
+              >
+                JUST DO IT
+              </Typography>
+            </Link>
+          </Box>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}>
             {pages.map((page) => (
               <Link
                 key={page}
@@ -147,11 +143,17 @@ function Header() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <DarkSwitch defaultChecked />
+            <IconButton
+              sx={{ ml: 1 }}
+              onClick={toggleColorMode}
+              color='inherit'
+            >
+              {mode === 'dark' ? <DarkModeIcon /> : <LightModeIcon />}
+            </IconButton>
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
   );
-}
+};
 export default Header;

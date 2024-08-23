@@ -21,15 +21,24 @@ const TaskCard = (props: TaskCardI) => {
   return (
     <Paper
       sx={{
-        display: 'flex',
         p: 2,
+        display: { sm: 'flex' },
+        flexDirection: { sm: 'col', md: 'row' },
         alignItems: 'center',
         justifyContent: 'space-between',
+        width: '100%',
       }}
     >
-      <Typography sx={{ width: '80%' }}>{props.task.task_desc}</Typography>
+      <Typography
+        sx={{
+          width: { sm: '80%' },
+          mb: { xs: 2, sm: 0 },
+        }}
+      >
+        {props.task.task_desc}
+      </Typography>
 
-      <FormControl sx={{ width: '20%' }}>
+      <FormControl sx={{ width: { sm: '20%' }, display: {xs: 'flex'},  }}>
         <InputLabel id='select-label'>Status</InputLabel>
         <Select
           labelId='select-label'
